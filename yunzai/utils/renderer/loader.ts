@@ -10,8 +10,10 @@ import rendererFn from '../renderers/index.js'
 
 /**
  * 加载渲染器
- * 这是被废弃的截图工具
- * 请积极使用最新版
+ * ***********
+ * 已废弃
+ * *********
+ * 请阅读puppeteer了解制作截图工具
  * @deprecated 已废弃
  */
 class RendererLoader {

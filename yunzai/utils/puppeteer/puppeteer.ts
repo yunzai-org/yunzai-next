@@ -1,7 +1,9 @@
 import Renderer from '../renderer/loader.js'
 /**
  * 这是被废弃的截图工具
- * 请积极使用最新版
+ * ********
+ * 请阅读puppeteer了解制作截图工具
+ * *******
  * @deprecated 已废弃
  */
 const renderer = Renderer.getRenderer()

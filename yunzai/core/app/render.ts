@@ -45,7 +45,7 @@ function scale(pct = 1) {
 export async function Render(path, params, cfg) {
   let { e } = cfg
   if (!e.runtime) {
-    console.log('未找到e.runtime，请升级至最新版Yunzai')
+    console.log('未找到e.runtime，请升级至最新版YZ-NEXT')
   }
   return e.runtime.render(cfg.plugin || 'miao-plugin', path, params, {
     //

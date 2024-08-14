@@ -2,6 +2,7 @@ import log4js from 'log4js'
 import chalk from 'chalk'
 import { mkdirSync } from 'node:fs'
 import cfg from '../config/config.js'
+import { BOT_NAME } from '../config/system.js'
 
 /**
  * ***********
@@ -22,7 +23,7 @@ function createLog() {
         type: 'console',
         layout: {
           type: 'pattern',
-          pattern: `%[[YZ-V${cfg.package?.version ?? '4'}][%d{hh:mm:ss.SSS}][%4.4p]%] %m`
+          pattern: `%[[${BOT_NAME}@${cfg.package?.version ?? '4'}][%d{hh:mm:ss.SSS}][%4.4p]%] %m`
         }
       },
       command: {
