@@ -1,4 +1,4 @@
 /**
- * @type {import("yunzai/pm2").AppsStartOptions}
+ * @type {{ apps: import("pm2").StartOptions[] }}
  */
 module.exports = require('yunzai/pm2')

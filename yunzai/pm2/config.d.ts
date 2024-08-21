@@ -1,4 +1,5 @@
-import { type StartOptions } from 'pm2'
-export type AppsStartOptions = {
-  apps: StartOptions[]
+import type { StartOptions } from 'pm2'
+declare module 'yunzai/pm2' {
+  const apps: StartOptions[]
+  export { apps }
 }
