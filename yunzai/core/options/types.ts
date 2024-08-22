@@ -5,8 +5,8 @@ import { EventEmun } from '../types.js'
  * 配置选择
  */
 export type ConifigOptions = {
-  applications?: ApplicationOptions[]
-  middlewares?: MiddlewareOptoins[]
+  applications?: (string | ApplicationOptions)[]
+  middlewares?: (MiddlewareOptoins | string)[]
 }
 
 /**

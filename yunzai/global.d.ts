@@ -81,26 +81,25 @@ type ChalkInstanceType = {
 declare global {
   /**
    * 键值对型数据库
-   * @deprecated 不推荐使用，未来将废弃
+   * @deprecated 不推荐使用，请从模块中导入
    * import { Redis } from 'yunzai'
    */
   var redis: RedisClientType
   /**
-   * 机器人客户端
-   * @deprecated 不推荐使用，未来将废弃
-   * import { Bot } from 'yunzai'
-   */
-  var Bot: typeof Client.prototype
-  /**
    * import { Segment } from 'yunzai'
-   * @deprecated 不推荐使用，未来将废弃
+   * @deprecated 不推荐使用，请从模块中导入
    */
   var segment: typeof se
   /**
-   * @deprecated 不推荐使用，未来将废弃
+   * @deprecated 不推荐使用，请从模块中导入
    * import { Plugin } from 'yunzai'
    */
   var plugin: typeof p
+  /**
+   * 机器人客户端
+   * import { Bot } from 'yunzai'
+   */
+  var Bot: typeof Client.prototype
   /**
    * 统一化的打印对象
    * 构造颜色请使用 logger.chalk

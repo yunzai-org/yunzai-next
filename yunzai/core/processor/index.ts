@@ -4,18 +4,22 @@
  */
 
 import { join } from 'path'
-import { ConifigOptions } from '../options/types.js'
+import {
+  ApplicationOptions,
+  ConifigOptions,
+  MiddlewareOptoins
+} from '../options/types.js'
 
 class ProcessorCore {
   /**
    *
    */
-  #applications: ConifigOptions['applications'] = null
+  #applications: ApplicationOptions[] = []
 
   /**
    *
    */
-  #middlewares: ConifigOptions['middlewares'] = null
+  #middlewares: MiddlewareOptoins[] = []
 
   /**
    *
@@ -35,23 +39,48 @@ class ProcessorCore {
    * 输入配置参数
    */
   async install(configdir = 'yunzai.config.js') {
+    //
     const jsDir = join(process.cwd(), configdir)
+    //
     const config: ConifigOptions = (
       await import(`file://${jsDir}?t=${Date.now()}`)
     ).default
-    this.#applications = config.applications
-    this.#middlewares = config.middlewares
-    if (Array.isArray(this.#applications)) {
-      for (const app of this.#applications) {
-        if (typeof app?.create == 'function') app.create(config)
+    // init
+    this.#applications = []
+    // inint
+    this.#applications = []
+    //
+    if (Array.isArray(config.middlewares)) {
+      for (const mw of config.middlewares) {
+        if (typeof mw == 'string') {
+          try {
+            const strMW = await import(`${mw}`)
+            this.#applications.push(strMW.default())
+          } catch (e) {
+            console.error(e)
+          }
+        } else {
+          this.#middlewares.push(mw)
+        }
+      }
+    }
+    //
+    if (Array.isArray(config.applications)) {
+      for (const app of config.applications) {
+        if (typeof app == 'string') {
+          try {
+            const strApp = await import(`${app}`)
+            this.#applications.push(strApp.default())
+          } catch (e) {
+            console.error(e)
+          }
+        } else {
+          this.#applications.push(app)
+        }
       }
     }
   }
-
   //
 }
 
-/**
- *
- */
 export const Processor = new ProcessorCore()

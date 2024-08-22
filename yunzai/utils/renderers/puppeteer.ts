@@ -4,6 +4,7 @@ import puppeteer, { Browser, PuppeteerLaunchOptions } from 'puppeteer'
 import Renderer from '../renderer/Renderer.js'
 import cfg from '../../config/config.js'
 import { BOT_CHROMIUM_KEY } from '../../config/system.js'
+import { Redis } from '../../init/redis.js'
 const _path = process.cwd()
 /**
  * mac地址
@@ -80,7 +81,7 @@ export default class Puppeteer extends Renderer {
       }
       // 是否有browser实例
       const browserUrl =
-        (await redis.get(this.browserMacKey)) || this.config.wsEndpoint
+        (await Redis.get(this.browserMacKey)) || this.config.wsEndpoint
       if (browserUrl) {
         try {
           const browserWSEndpoint = await puppeteer.connect({
@@ -93,7 +94,7 @@ export default class Puppeteer extends Renderer {
           }
           logger.info(`puppeteer Chromium 连接成功 ${browserUrl}`)
         } catch (err) {
-          await redis.del(this.browserMacKey)
+          await Redis.del(this.browserMacKey)
         }
       }
     } catch (err) {}
@@ -134,7 +135,7 @@ export default class Puppeteer extends Renderer {
       if (this.browserMacKey) {
         // 缓存一下实例30天
         const expireTime = 60 * 60 * 24 * 30
-        await redis.set(this.browserMacKey, this.browser.wsEndpoint(), {
+        await Redis.set(this.browserMacKey, this.browser.wsEndpoint(), {
           EX: expireTime
         })
       }

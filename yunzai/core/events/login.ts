@@ -44,67 +44,64 @@ export class EventLogin extends EventListener {
    * @param event
    */
   async qrcode(_) {
+    logger.mark(`\n`)
+    logger.mark(`请使用登录当前QQ的手机${logger.chalk.green('扫码')}完成登录`)
     logger.mark(
-      `请使用登录当前QQ的手机${logger.chalk.green('扫码')}完成登录，\n
-      如果显示二维码过期，可以按${logger.chalk.green('回车键（Enter）')}刷新，\n
-      重新输入密码请执行命令：${logger.chalk.green('node app login')}`
+      `如果显示二维码过期，可以按${logger.chalk.green('回车键（Enter）')}刷新`
     )
+    logger.mark(
+      `重新输入密码请退出后执行命令：${logger.chalk.green('npm run login')}`
+    )
+    logger.mark(`\n`)
 
-    /**
-     * 获取扫码结果
-     */
+    // 次数
     let time = 0
 
-    /**
-     * 循环定时
-     */
-    const interval = setInterval(async () => {
+    const start = async () => {
+      // 积累次数
       time++
 
-      /**
-       *
-       */
+      // 得到扫码结果
       const res = await this.client.queryQrcodeResult()
 
-      /**
-       *
-       */
+      // 成功
       if (res.retcode === 0) {
         inSlider = true
+
         logger.info(logger.chalk.green('\n扫码成功，开始登录...\n'))
+
         // 阻塞1秒
         await sleep(1000)
 
         // 二维码登录
         this.client.qrcodeLogin()
-
-        // 取消定时
-        clearInterval(interval)
       }
-      /**
-       *
-       */
+
       if (time >= 150) {
-        // 取消定时
-        clearInterval(interval)
         logger.error('等待扫码超时，已停止运行\n')
         process.exit()
+      } else {
+        start()
       }
-    }, 2000)
+    }
 
-    /**
-     * 刷新二维码
-     */
-    inquirer
-      .prompt({
-        type: 'input',
-        message: '回车刷新二维码，等待扫码中...\n',
-        name: 'enter'
-      })
-      .then(async () => {
-        if (!inSlider) {
-          // 取消定时
-          clearInterval(interval)
+    const timeout = setTimeout(start, 2000)
+
+    // 未完成
+    if (!inSlider) {
+      // 刷新二维码
+      inquirer
+        .prompt({
+          type: 'input',
+          message: '回车刷新二维码，等待扫码中...\n',
+          name: 'enter'
+        })
+        .then(async () => {
+          // 完成登录了
+          if (inSlider) return
+          // 取消任务
+          timeout && clearTimeout(timeout)
+
           console.log('\n重新刷新二维码...\n\n')
 
           // 阻塞1秒
@@ -112,8 +109,11 @@ export class EventLogin extends EventListener {
 
           // 刷新二维码
           this.client.fetchQrcode()
-        }
-      })
+        })
+        .catch(() => {
+          timeout && clearTimeout(timeout)
+        })
+    }
   }
 
   /**

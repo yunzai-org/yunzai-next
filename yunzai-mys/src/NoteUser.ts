@@ -7,6 +7,7 @@ import { UserDB } from './db/index.js'
 // Data.forEach
 import * as Data from './utils/Data.js'
 import { BOT_NOTE_USER } from './system.js'
+import { Redis } from 'yunzai'
 /**
  * *******************
  * Bot实际User用户类
@@ -106,7 +107,7 @@ export default class NoteUser extends BaseModel {
     if (qq && qq.user_id) {
       let e = qq
       let id = e.originalUserId || e.user_id
-      let mainId = await redis.get(`${BOT_NOTE_USER}mainId:${e.user_id}`)
+      let mainId = await Redis.get(`${BOT_NOTE_USER}mainId:${e.user_id}`)
       if (mainId) {
         id = mainId
         e.mainUserId = mainId

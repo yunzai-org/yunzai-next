@@ -1,5 +1,6 @@
 import { BOT_COUNT_KEY } from '../../config/system.js'
 import { EventType } from '../types.js'
+import { Redis } from '../../init/redis.js'
 import moment from 'moment'
 export class Count {
   /**
@@ -52,15 +53,15 @@ export class Count {
     //
     const totalKey = `${key}${type}:total`
     //
-    redis.incr(dayKey)
+    Redis.incr(dayKey)
     //
-    redis.incr(monthKey)
+    Redis.incr(monthKey)
     //
-    if (!groupId) redis.incr(totalKey)
+    if (!groupId) Redis.incr(totalKey)
     //
-    redis.expire(dayKey, 3600 * 24 * 30)
+    Redis.expire(dayKey, 3600 * 24 * 30)
     //
-    redis.expire(monthKey, 3600 * 24 * 30)
+    Redis.expire(monthKey, 3600 * 24 * 30)
   }
 
   /**
@@ -68,8 +69,8 @@ export class Count {
    */
   del() {
     //
-    redis.set(`${BOT_COUNT_KEY}sendMsg:total`, '0')
+    Redis.set(`${BOT_COUNT_KEY}sendMsg:total`, '0')
     //
-    redis.set(`${BOT_COUNT_KEY}screenshot:total`, '0')
+    Redis.set(`${BOT_COUNT_KEY}screenshot:total`, '0')
   }
 }

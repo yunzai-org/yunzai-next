@@ -19,11 +19,11 @@ export async function createLogin() {
   /**
    * 跳过登录ICQQ
    */
-  if (cfg.bot.skip_login) return
+  if (cfg.bot.skip_login) return false
   /**
    * qq 存在且不是登录
    */
-  if (cfg.qq && !process.argv.includes('login')) return
+  if (cfg.qq && !process.argv.includes('login')) return true
   /**
    *
    */
@@ -126,6 +126,10 @@ export async function createLogin() {
   if (ret.signAPI) {
     bot = bot.replace(/sign_api_addr:/g, `sign_api_addr: ${ret.signAPI}`)
   }
+
+  /**
+   * 
+   */
   writeFileSync(join(CONFIG_INIT_PATH, 'bot.yaml'), bot, 'utf8')
 
   /**
@@ -147,4 +151,6 @@ export async function createLogin() {
    * 阻塞2秒
    */
   await sleep(2000)
+
+  return true
 }

@@ -30,6 +30,7 @@ export class Client extends IcqqClient {
 
   /**
    * 登录机器人
+   * @param callBack
    * @returns
    */
   static async run() {
@@ -52,9 +53,8 @@ export class Client extends IcqqClient {
     await bot.login(cfg.qq, cfg.pwd)
 
     // 额外的全局
-    const uin = bot.uin
-    if (!global.Bot[uin]) global.Bot[uin] = null
-    global.Bot[uin] = bot
+    if (!global.Bot[bot.uin]) global.Bot[bot.uin] = null
+    global.Bot[bot.uin] = bot
     return
   }
 
@@ -64,12 +64,10 @@ export class Client extends IcqqClient {
    * @returns
    */
   static async skip_login(bot: typeof Client.prototype) {
-    //
     bot.uin = 88888
     // 额外的全局
-    const uin = bot.uin
-    if (!global.Bot[uin]) global.Bot[uin] = null
-    global.Bot[uin] = bot
+    if (!global.Bot[bot.uin]) global.Bot[bot.uin] = null
+    global.Bot[bot.uin] = bot
     return
   }
 }

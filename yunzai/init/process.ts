@@ -1,5 +1,6 @@
 import { BOT_NAME } from '../config/system.js'
 import config from '../config/config.js'
+import { Redis } from './redis.js'
 /**
  * 设置标题
  */
@@ -31,7 +32,7 @@ process.on('unhandledRejection', error => {
  */
 process.on('exit', async () => {
   // 退出之前，保存redis
-  if (typeof redis != 'undefined') await redis.save()
+  if (typeof Redis != 'undefined') await Redis.save()
   if (typeof logger == 'undefined') {
     console.log(`${BOT_NAME} 已停止运行`)
   } else {
