@@ -19,11 +19,15 @@ export async function createLogin() {
   /**
    * 跳过登录ICQQ
    */
-  if (cfg.bot.skip_login) return false
+  if (cfg.bot.skip_login || process.argv.includes('--skip')) return false
+  /**
+   * 是否登录
+   */
+  const T = process.argv.includes('login') || process.argv.includes('--login') || process.argv.includes('--relogin')
   /**
    * qq 存在且不是登录
    */
-  if (cfg.qq && !process.argv.includes('login')) return true
+  if (cfg.qq && !T) return true
   /**
    *
    */

@@ -11,11 +11,15 @@ const initialize = () => {
 // *********************
 const start = async () => {
   // 登录配置校验
-  await createLogin()
-  // 运行机器人
-  await Client.run()
-  // 上线时运行
-  Bot.on('system.online', initialize)
+  const T = await createLogin()
+  if (T) {
+    // 运行机器人
+    await Client.run()
+    // 上线时运行
+    Bot.on('system.online', initialize)
+  } else {
+    initialize()
+  }
 }
 
 /**
