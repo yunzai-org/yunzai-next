@@ -48,14 +48,14 @@ class ProcessorCore {
     // init
     this.#applications = []
     // inint
-    this.#applications = []
+    this.#middlewares = []
     //
     if (Array.isArray(config.middlewares)) {
       for (const mw of config.middlewares) {
         if (typeof mw == 'string') {
           try {
             const strMW = await import(`${mw}`)
-            this.#applications.push(strMW.default())
+            this.#middlewares.push(strMW.default())
           } catch (e) {
             console.error(e)
           }
