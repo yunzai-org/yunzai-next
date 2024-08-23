@@ -29,7 +29,6 @@
     "yunzai": "link:yunzai",
     "yunzai-mys": "link:yunzai-mys",
     "yz-mw-runtime": "link:middleware/runtime",
-    "yz-mw-mys": "link:middleware/mys",
     "yz-system": "^1.0.6"
   },
   "devDependencies": {
