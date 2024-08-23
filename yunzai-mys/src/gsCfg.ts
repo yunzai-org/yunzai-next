@@ -78,11 +78,13 @@ class GsCfg {
    * @param type 默认跑配置-defSet，用户配置-config
    */
   getYaml(app, name, type) {
-    let file = this.getFilePath(app, name, type)
-    let key = `${app}.${name}`
+    const file = this.getFilePath(app, name, type)
+    const key = `${app}.${name}`
     if (this[type][key]) return this[type][key]
+    if (!existsSync(file)) return false
     try {
-      this[type][key] = YAML.parse(readFileSync(file, 'utf8'))
+      const data = readFileSync(file, 'utf8')
+      this[type][key] = YAML.parse(data)
     } catch (error) {
       logger.error(`[${app}][${name}] 格式错误 ${error}`)
       return false

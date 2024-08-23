@@ -43,10 +43,10 @@ export class Client extends IcqqClient {
     // 事件监听，传入 实例
     await ListenerLoader.load(bot)
 
-    // 如果
-    if (cfg.bot.skip_login) {
+    //
+    if (cfg.bot.skip_login || process.argv.includes('--skip')) {
       await this.skip_login(bot)
-      return
+      return false
     }
 
     //
@@ -55,7 +55,7 @@ export class Client extends IcqqClient {
     // 额外的全局
     if (!global.Bot[bot.uin]) global.Bot[bot.uin] = null
     global.Bot[bot.uin] = bot
-    return
+    return true
   }
 
   /**

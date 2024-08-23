@@ -10,11 +10,11 @@ const initialize = () => {
 
 // *********************
 const start = async () => {
+  await createLogin()
   // 登录配置校验
-  const T = await createLogin()
+  const T = await Client.run()
+  // 登录模式成功
   if (T) {
-    // 运行机器人
-    await Client.run()
     // 上线时运行
     Bot.on('system.online', initialize)
   } else {
