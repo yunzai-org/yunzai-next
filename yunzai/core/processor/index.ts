@@ -54,7 +54,7 @@ class ProcessorCore {
       for (const mw of config.middlewares) {
         if (typeof mw == 'string') {
           try {
-            const strMW = await import(`${mw}`)
+            const strMW = await import(mw)
             this.#middlewares.push(strMW.default())
           } catch (e) {
             console.error(e)
@@ -66,16 +66,21 @@ class ProcessorCore {
     }
     //
     if (Array.isArray(config.applications)) {
-      for (const app of config.applications) {
-        if (typeof app == 'string') {
+      for (const application of config.applications) {
+        console.log(application)
+        if (typeof application == 'string') {
           try {
-            const strApp = await import(`${app}`)
-            this.#applications.push(strApp.default())
+            const strApp = await import(application)
+            const app = strApp?.default()
+            if (typeof app?.create == 'function') app.create(config)
+            this.#applications.push(app)
           } catch (e) {
             console.error(e)
           }
         } else {
-          this.#applications.push(app)
+          if (typeof application?.create == 'function')
+            application.create(config)
+          this.#applications.push(application)
         }
       }
     }
