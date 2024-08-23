@@ -19,6 +19,14 @@ export default defineConfig(
       outDir: 'yunzai-mys/types'
     },
     {
+      input: 'yunzai-mys/src/middleware.ts',
+      file: 'yunzai-mys/middleware.js',
+      include: ['yunzai-mys/src/middleware.ts'],
+      declaration: false,
+      declarationDir: undefined,
+      outDir: undefined
+    },
+    {
       input: 'src/main.ts',
       file: 'src/main.js',
       include: ['src/main.ts'],
@@ -48,14 +56,6 @@ export default defineConfig(
       include: ['middleware/runtime/**/*'],
       declaration: true,
       declarationDir: 'middleware/runtime/types',
-      outDir: undefined
-    },
-    {
-      input: 'middleware/star-rail/index.ts',
-      file: 'middleware/star-rail/index.js',
-      include: ['middleware/star-rail/**/*'],
-      declaration: true,
-      declarationDir: 'middleware/star-rail/types',
       outDir: undefined
     }
   ].map(item => {

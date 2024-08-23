@@ -236,14 +236,14 @@ class Loader {
     if (!packageErr || packageErr.length <= 0) return
     logger.mark('--------插件载入错误--------')
     packageErr.forEach(v => {
-      let pack = v.error.stack.match(/'(.+?)'/g)[0].replace(/'/g, '')
+      const pack = v.error.stack.match(/'(.+?)'/g)[0].replace(/'/g, '')
       logger.mark(`${v.file.name} 缺少依赖：${logger.chalk.red(pack)}`)
       logger.mark(
-        `新增插件后请执行安装命令：${logger.chalk.red('pnpm i')} 安装依赖`
+        `新增插件后请执行${logger.chalk.red(`yarn add ${pack}`)} 检查依赖`
       )
-      logger.mark(
-        `如安装后仍未解决可联系插件作者将 ${logger.chalk.red(pack)} 依赖添加至插件的package.json dependencies中，或手工安装依赖`
-      )
+      logger.mark(`或执行${logger.chalk.red(`yarn add ${pack}`)} 添加依赖`)
+      logger.mark(`若未能解决,请该仓库阅读文档或检查是否配置依赖`)
+      logger.mark(`file: plugins/${v.file.name}/package.json`)
     })
     logger.mark('---------------------')
   }

@@ -1,5 +1,5 @@
 import { defineConfig } from 'yunzai'
 export default defineConfig({
   applications: ['yz-system'],
-  middlewares: ['yz-mw-runtime', 'yz-mw-star-rail']
+  middlewares: ['yz-mw-runtime', 'yunzai-mys/mw']
 })
