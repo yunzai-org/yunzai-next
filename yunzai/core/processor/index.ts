@@ -67,7 +67,6 @@ class ProcessorCore {
     //
     if (Array.isArray(config.applications)) {
       for (const application of config.applications) {
-        console.log(application)
         if (typeof application == 'string') {
           try {
             const strApp = await import(application)
