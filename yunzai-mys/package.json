@@ -34,6 +34,9 @@
       "types": "./types/src/middleware.d.ts"
     }
   },
+  "keywords": [
+    "yunzai"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

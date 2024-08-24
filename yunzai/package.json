@@ -63,6 +63,9 @@
       "types": "./types/rollup/index.d.ts"
     }
   },
+  "keywords": [
+    "yunzai"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

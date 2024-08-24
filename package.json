@@ -1,6 +1,6 @@
 {
   "name": "yunzai-next",
-  "version": "4.1.29",
+  "version": "4.1.30",
   "author": "Yoimiya-Kokomi, Le-niao",
   "description": "QQ Group Bot",
   "main": "./src/main.js",
@@ -29,7 +29,7 @@
     "yunzai": "link:yunzai",
     "yunzai-mys": "link:yunzai-mys",
     "yz-mw-runtime": "link:middleware/runtime",
-    "yz-system": "^1.0.6"
+    "yz-system": "^1.0.8"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
