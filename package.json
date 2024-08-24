@@ -1,6 +1,6 @@
 {
   "name": "yunzai-next",
-  "version": "4.1.31",
+  "version": "4.1.32",
   "author": "Yoimiya-Kokomi, Le-niao",
   "description": "QQ Group Bot",
   "main": "./src/main.js",
@@ -17,7 +17,7 @@
     "monit": "pm2 monit",
     "pm2": "pm2",
     "build": "rollup --config rollup.config.js",
-    "version-app": "node src/version.js",
+    "version-app": "npx tsx src/version.ts",
     "ts-app": "npx tsx src/main.js",
     "test-app": "npx tsx src/main.ts",
     "format": "prettier --write .",
@@ -28,7 +28,7 @@
     "react-puppeteer": "^1.0.3",
     "yunzai": "link:yunzai",
     "yunzai-mys": "^1.0.2",
-    "yz-mw-runtime": "link:middleware/runtime",
+    "yunzai-runtime": "^1.0.0",
     "yz-system": "^1.0.8"
   },
   "devDependencies": {

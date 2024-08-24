@@ -11,22 +11,6 @@ export default defineConfig(
       outDir: 'yunzai/types'
     },
     {
-      input: 'src/main.ts',
-      file: 'src/main.js',
-      include: ['src/main.ts'],
-      declaration: false,
-      declarationDir: undefined,
-      outDir: undefined
-    },
-    {
-      input: 'src/version.ts',
-      file: 'src/version.js',
-      include: ['src/version.ts'],
-      declaration: false,
-      declarationDir: undefined,
-      outDir: undefined
-    },
-    {
       input: 'yunzai/rollup/index.ts',
       file: 'yunzai/rollup/index.js',
       include: ['yunzai/rollup/index.ts'],
@@ -35,11 +19,11 @@ export default defineConfig(
       outDir: undefined
     },
     {
-      input: 'middleware/runtime/index.ts',
-      file: 'middleware/runtime/index.js',
-      include: ['middleware/runtime/**/*'],
-      declaration: true,
-      declarationDir: 'middleware/runtime/types',
+      input: 'src/main.ts',
+      file: 'src/main.js',
+      include: ['src/main.ts'],
+      declaration: false,
+      declarationDir: undefined,
       outDir: undefined
     }
   ].map(item => {
