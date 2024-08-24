@@ -1,11 +1,4 @@
-# 检查版本
-
+find . -name ".DS_Store" -type f -delete
 npm run version-app
-
-# 格式化代码
-
 npm run format
-
-# 检查一致性
-
 npm run check-format

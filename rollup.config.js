@@ -11,22 +11,6 @@ export default defineConfig(
       outDir: 'yunzai/types'
     },
     {
-      input: 'yunzai-mys/index.ts',
-      file: 'yunzai-mys/index.js',
-      include: ['yunzai-mys/**/*'],
-      declaration: true,
-      declarationDir: 'yunzai-mys/types',
-      outDir: 'yunzai-mys/types'
-    },
-    {
-      input: 'yunzai-mys/src/middleware.ts',
-      file: 'yunzai-mys/middleware.js',
-      include: ['yunzai-mys/src/middleware.ts'],
-      declaration: false,
-      declarationDir: undefined,
-      outDir: undefined
-    },
-    {
       input: 'src/main.ts',
       file: 'src/main.js',
       include: ['src/main.ts'],
