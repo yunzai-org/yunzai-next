@@ -1,10 +1,4 @@
 {
-  "include": [
-    "src/**/*",
-    "yunzai/**/*",
-    "yunzai-mys/**/*",
-    "plugins/**/*",
-    "middleware/**/*"
-  ],
+  "include": ["src/**/*", "yunzai/**/*", "plugins/**/*"],
   "extends": "yunzai/tsconfig/tsconfig.json"
 }

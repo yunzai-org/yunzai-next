@@ -1,7 +1,7 @@
 {
   "name": "yunzai-next",
   "version": "4.1.34",
-  "author": "Yoimiya-Kokomi, Le-niao",
+  "author": "Le-niao",
   "description": "QQ Group Bot",
   "main": "./src/main.js",
   "private": true,
