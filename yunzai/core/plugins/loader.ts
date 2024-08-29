@@ -239,9 +239,9 @@ class Loader {
       const pack = v.error.stack.match(/'(.+?)'/g)[0].replace(/'/g, '')
       logger.mark(`${v.file.name} 缺少依赖：${logger.chalk.red(pack)}`)
       logger.mark(
-        `新增插件后请执行${logger.chalk.red(`yarn add ${pack}`)} 检查依赖`
+        `新增插件后请执行${logger.chalk.red(`yarn install`)} 检查依赖`
       )
-      logger.mark(`或执行${logger.chalk.red(`yarn add ${pack}`)} 添加依赖`)
+      logger.mark(`或执行${logger.chalk.red(`yarn add ${pack} -W`)} 添加依赖`)
       logger.mark(`若未能解决,请该仓库阅读文档或检查是否配置依赖`)
       logger.mark(`file: plugins/${v.file.name}/package.json`)
     })
