@@ -1,6 +1,6 @@
 {
   "name": "yunzai-next",
-  "version": "4.1.36",
+  "version": "4.1.37",
   "author": "Le-niao",
   "description": "QQ Group Bot",
   "main": "./src/main.js",

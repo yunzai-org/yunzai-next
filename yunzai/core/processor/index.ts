@@ -26,6 +26,12 @@ class ProcessorCore {
   #middlewares: MiddlewareOptoins[] = []
 
   /**
+   * 用于判断是否已经存在
+   * 确保不会重复加载
+   */
+  #names = {}
+
+  /**
    *
    */
   get applications() {
@@ -50,6 +56,10 @@ class ProcessorCore {
     if (Array.isArray(config.middlewares)) {
       for (const mw of config.middlewares) {
         if (typeof mw == 'string') {
+          // 判断是否已经存在
+          if (this.#names[mw]) continue
+          this.#names[mw] = true
+
           try {
             const strMW = await import(mw)
             this.#middlewares.push(strMW.default())
@@ -65,6 +75,9 @@ class ProcessorCore {
     if (Array.isArray(config.applications)) {
       for (const application of config.applications) {
         if (typeof application == 'string') {
+          // 判断是否已经存在
+          if (this.#names[application]) continue
+          this.#names[application] = true
           try {
             const strApp = await import(application)
             const app = strApp?.default()
@@ -96,6 +109,9 @@ class ProcessorCore {
     if (Array.isArray(config.middlewares)) {
       for (const mw of config.middlewares) {
         if (typeof mw == 'string') {
+          // 判断是否已经存在
+          if (this.#names[mw]) continue
+          this.#names[mw] = true
           try {
             const strMW = await import(mw)
             this.#middlewares.push(strMW.default())
@@ -111,6 +127,9 @@ class ProcessorCore {
     if (Array.isArray(config.applications)) {
       for (const application of config.applications) {
         if (typeof application == 'string') {
+          // 判断是否已经存在
+          if (this.#names[application]) continue
+          this.#names[application] = true
           try {
             const strApp = await import(application)
             const app = strApp?.default()
@@ -136,8 +155,10 @@ class ProcessorCore {
   ) {
     // init
     this.#applications = []
-    // inint
+    // init
     this.#middlewares = []
+    // init
+    this.#names = {}
     // start
     if (!Array.isArray(configdir)) {
       if (/.(js|ts)$/.test(configdir)) {
