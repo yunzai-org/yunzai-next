@@ -3,9 +3,9 @@ import { parse } from 'yaml'
 import { join } from 'node:path'
 import { readFileSync } from 'node:fs'
 import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
-import { CONFIG_DEFAULT_PATH, CONFIG_INIT_PATH } from './system.js'
+import { CONFIG_DEFAULT_PATH, CONFIG_INIT_PATH } from '@/config/system.js'
 import { createRequire } from 'module'
-import { app } from '../config.js'
+import { app } from '@/config.js'
 
 //
 const require = createRequire(import.meta.url)

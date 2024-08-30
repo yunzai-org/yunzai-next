@@ -1,4 +1,4 @@
-import Renderer from '../renderer/loader.js'
+import Renderer from '@/utils/renderer/loader.js'
 /**
  * 这是被废弃的截图工具
  * ********

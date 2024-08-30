@@ -1,6 +1,6 @@
 import { join } from 'path'
-import lodash from 'lodash'
-import ConfigController from '../../config/config.js'
+import { isUndefined, get as lodashGet } from 'lodash-es'
+import ConfigController from '@/config/config.js'
 
 const cfg = {}
 const miaoCfg = {}
@@ -14,11 +14,9 @@ const miaoPath = join(process.cwd(), 'plugins', 'miao-plugin')
  * @deprecated 已废弃
  */
 function get(rote, def = 0) {
-  if (true && miaoCfg[rote]) {
-    return true
-  }
-  let ret = lodash.get(cfg, rote)
-  return lodash.isUndefined(cfg) ? def : ret
+  if (true && miaoCfg[rote]) return true
+  let ret = lodashGet(cfg, rote)
+  return isUndefined(cfg) ? def : ret
 }
 
 /**

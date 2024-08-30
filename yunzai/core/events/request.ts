@@ -1,4 +1,4 @@
-import EventListener from './listener.js'
+import EventListener from '@/core/events/listener.js'
 /**
  * 监听群聊消息
  */

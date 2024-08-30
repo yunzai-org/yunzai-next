@@ -1,8 +1,9 @@
-import EventListener from './listener.js'
-import { sleep } from '../../utils/common.js'
+import EventListener from '@/core/events/listener.js'
 import inquirer from 'inquirer'
-import lodash from 'lodash'
+import { trim } from 'lodash-es'
 import fetch from 'node-fetch'
+import { promisify } from 'util'
+const sleep = promisify(setTimeout)
 /**
  * 监听上线事件
  */
@@ -175,7 +176,7 @@ export class EventLogin extends EventListener {
           return true
         }
       })
-      ticket = lodash.trim(res.ticket, '"')
+      ticket = trim(res.ticket, '"')
     }
     global.inputTicket = true
     this.client.submitSlider(ticket.trim())
@@ -265,7 +266,7 @@ export class EventLogin extends EventListener {
     }
 
     console.log(`\n获取ticket成功：\n${txhelper.res}\n`)
-    return lodash.trim(txhelper.res)
+    return trim(txhelper.res)
   }
 
   /**

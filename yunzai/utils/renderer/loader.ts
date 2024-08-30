@@ -1,12 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import yaml from 'yaml'
-import lodash from 'lodash'
-import {
-  ConfigController as cfg,
-  CONFIG_INIT_PATH
-} from '../../config/index.js'
+import { isFunction } from 'lodash-es'
+import { ConfigController as cfg, CONFIG_INIT_PATH } from '@/config/index.js'
 import { join } from 'node:path'
-import rendererFn from '../renderers/index.js'
+import rendererFn from '@/utils/renderers/index.js'
 
 /**
  * 加载渲染器
@@ -61,7 +58,7 @@ class RendererLoader {
           !renderer.id ||
           !renderer.type ||
           !renderer.render ||
-          !lodash.isFunction(renderer.render)
+          !isFunction(renderer.render)
         ) {
           logger.warn('渲染后端 ' + (renderer.id || subFolder.name) + ' 不可用')
         }

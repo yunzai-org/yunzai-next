@@ -1,4 +1,4 @@
-export * from './system.js'
-import ConfigController from './config.js'
+export * from '@/config/system.js'
+import ConfigController from '@/config/config.js'
 export { ConfigController }
-export { createLogin } from './login.js'
+export { createLogin } from '@/config/login.js'

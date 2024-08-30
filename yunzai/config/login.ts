@@ -5,8 +5,8 @@ import {
   BOT_NAME,
   CONFIG_DEFAULT_PATH,
   CONFIG_INIT_PATH,
-} from './system.js'
-import cfg from './config.js'
+} from '@/config/system.js'
+import cfg from '@/config/config.js'
 import { join } from 'path'
 import { promisify } from 'util'
 const sleep = promisify(setTimeout)

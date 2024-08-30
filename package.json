@@ -1,6 +1,6 @@
 {
   "name": "yunzai-next",
-  "version": "4.1.34",
+  "version": "4.1.35",
   "author": "Le-niao",
   "description": "QQ Group Bot",
   "main": "./src/main.js",
@@ -25,31 +25,42 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "icqq": "^0.6.10",
+    "image-size": "^1.1.1",
+    "lodash": "^4.17.21",
+    "oicq": "^2.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-puppeteer": "^1.0.3",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
     "yunzai": "link:yunzai",
     "yunzai-mys": "^1.0.5",
     "yz-system": "^1.0.8"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-typescript": "^11.1.3",
     "@types/inquirer": "^9.0.7",
-    "@types/lodash": "^4.14.200",
+    "@types/lodash": "^4.17.7",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.8.5",
     "@types/node-localstorage": "^1.3.3",
     "@types/node-schedule": "^2.1.7",
-    "@types/react-dom": "^18.2.22",
+    "@types/react": "^18.3.3",
     "@types/redis": "^4.0.11",
-    "@types/ws": "^8.5.7",
+    "babel-plugin-module-resolver": "^5.0.2",
     "husky": "^9.1.1",
     "prettier": "^3.3.3",
     "rollup": "^4.16.4",
-    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
   "workspaces": [
     "plugins/**",
-    "middleware/**",
     "renderers/**"
   ],
   "imports": {

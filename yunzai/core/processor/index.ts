@@ -8,7 +8,7 @@ import {
   ApplicationOptions,
   ConifigOptions,
   MiddlewareOptoins
-} from '../options/types.js'
+} from '@/core/options/types.js'
 import { existsSync } from 'fs'
 import { createRequire } from 'module'
 

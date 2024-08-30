@@ -1,5 +1,5 @@
-import { Application } from './Application.js'
-import { EventEmun, PermissionEnum } from '../types.js'
+import { Application } from '@/core/app/Application.js'
+import { EventEmun, PermissionEnum } from '@/core/types.js'
 
 /**
  * 消息

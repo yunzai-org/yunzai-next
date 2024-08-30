@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import { app } from "../config"
+import { app } from "@/config.js"
 // 生成式配置
 export const CONFIG_INIT_PATH = join(process.cwd(), 'config', 'config')
 // 默认配置

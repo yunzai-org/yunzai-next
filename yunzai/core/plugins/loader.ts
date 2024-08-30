@@ -1,19 +1,19 @@
-import lodash from 'lodash'
 import { segment } from 'icqq'
 import { join } from 'node:path'
 import { existsSync, mkdirSync } from 'node:fs'
 import { stat, readdir } from 'node:fs/promises'
-import { EventType, RulesType } from '../types.js'
-import Handler from './handler.js'
-import cfg from '../../config/config.js'
-import { PLUGINS_PATH } from '../../config/system.js'
-import { Processor } from '../processor/index.js'
-import { observerHandle } from '../observer/headle.js'
-import { EventTypeMapFilter } from '../client/event.js'
-import { Task } from './task.js'
-import { Count } from './count.js'
-import { Limit } from './limit.js'
-import { Plugin } from '../app/plugin.js'
+import { truncate, trimStart, isEmpty, forEach, orderBy } from 'lodash-es'
+import { EventType, RulesType } from '@/core/types.js'
+import Handler from '@/core/plugins/handler.js'
+import cfg from '@/config/config.js'
+import { PLUGINS_PATH } from '@/config/system.js'
+import { Processor } from '@/core/processor/index.js'
+import { observerHandle } from '@/core/observer/headle.js'
+import { EventTypeMapFilter } from '@/core/client/event.js'
+import { Task } from '@/core/plugins/task.js'
+import { Count } from '@/core/plugins/count.js'
+import { Limit } from '@/core/plugins/limit.js'
+import { Plugin } from '@/core/app/plugin.js'
 
 /**
  * 加载插件
@@ -69,7 +69,7 @@ class Loader {
     this.Timer.createTask()
     logger.info(`定时数[${this.Timer.task.length}个]`)
     /** 优先级排序 */
-    this.priority = lodash.orderBy(this.priority, ['priority'], ['asc'])
+    this.priority = orderBy(this.priority, ['priority'], ['asc'])
   }
 
   /**
@@ -214,7 +214,7 @@ class Loader {
      */
     if (plugin.handler) {
       //
-      lodash.forEach(plugin.handler, ({ fn, key, priority }) => {
+      forEach(plugin.handler, ({ fn, key, priority }) => {
         //
         Handler.add({
           ns: plugin.namespace || file.name,
@@ -379,7 +379,7 @@ class Loader {
       }
 
       // 是空的
-      if (lodash.isEmpty(context)) continue
+      if (isEmpty(context)) continue
 
       // 不为空的时候
       let ret = false
@@ -428,7 +428,7 @@ class Loader {
         // 打印
         if (v.log !== false) {
           logger.info(
-            `${e.logFnc}${e.logText} ${lodash.truncate(e.msg, { length: 100 })}`
+            `${e.logFnc}${e.logText} ${truncate(e.msg, { length: 100 })}`
           )
         }
 
@@ -444,7 +444,7 @@ class Loader {
           // 打印
           if (v.log !== false) {
             logger.mark(
-              `${e.logFnc} ${lodash.truncate(e.msg, { length: 100 })} 处理完成 ${Date.now() - start}ms`
+              `${e.logFnc} ${truncate(e.msg, { length: 100 })} 处理完成 ${Date.now() - start}ms`
             )
           }
           // 不是 bool 而且 不为true  直接结束
@@ -656,7 +656,7 @@ class Loader {
       }
       for (let name of alias) {
         if (e.msg.startsWith(name)) {
-          e.msg = lodash.trimStart(e.msg, name).trim()
+          e.msg = trimStart(e.msg, name).trim()
           e.hasAlias = true
           break
         }
@@ -705,7 +705,7 @@ class Loader {
           let text = ''
           //
           if (e?.sender?.card) {
-            text = lodash.truncate(e.sender.card, { length: 10 })
+            text = truncate(e.sender.card, { length: 10 })
           }
           //
           if (at === true) {
@@ -718,7 +718,7 @@ class Loader {
               let info = e.group.pickMember(at).info
               text = info?.card ?? info?.nickname
             }
-            text = lodash.truncate(text, { length: 10 })
+            text = truncate(text, { length: 10 })
           }
           if (Array.isArray(msg)) {
             msg.unshift(segment.at(at, text), '\n')
@@ -786,7 +786,7 @@ class Loader {
 
             // 格式化json
 
-            msg = lodash.truncate(JSON.stringify(msg), { length: 300 })
+            msg = truncate(JSON.stringify(msg), { length: 300 })
 
             //
             logger.error(`发送消息错误:${msg}`)

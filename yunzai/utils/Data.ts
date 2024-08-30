@@ -1,6 +1,6 @@
-import lodash from 'lodash'
 import { existsSync, mkdirSync } from 'node:fs'
 import util from 'node:util'
+import { isArray, isPlainObject } from 'lodash-es'
 
 const _path = process.cwd()
 
@@ -60,7 +60,7 @@ export function isPromise(data) {
  * @param fn
  */
 export async function forEach(data, fn) {
-  if (lodash.isArray(data)) {
+  if (isArray(data)) {
     for (let idx = 0; idx < data.length; idx++) {
       let ret = fn(data[idx], idx)
       ret = isPromise(ret) ? await ret : ret
@@ -68,7 +68,7 @@ export async function forEach(data, fn) {
         break
       }
     }
-  } else if (lodash.isPlainObject(data)) {
+  } else if (isPlainObject(data)) {
     for (const idx in data) {
       let ret = fn(data[idx], idx)
       ret = isPromise(ret) ? await ret : ret

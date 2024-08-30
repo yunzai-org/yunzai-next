@@ -1,10 +1,10 @@
 import os from 'node:os'
-import lodash from 'lodash'
+import { trim, extend } from 'lodash-es'
 import puppeteer, { Browser, PuppeteerLaunchOptions } from 'puppeteer'
-import Renderer from '../renderer/Renderer.js'
-import cfg from '../../config/config.js'
-import { BOT_CHROMIUM_KEY } from '../../config/system.js'
-import { Redis } from '../../init/redis.js'
+import Renderer from '@/utils/renderer/Renderer.js'
+import cfg from '@/config/config.js'
+import { BOT_CHROMIUM_KEY } from '@/config/system.js'
+import { Redis } from '@/init/redis.js'
 const _path = process.cwd()
 /**
  * mac地址
@@ -220,14 +220,11 @@ export default class Puppeteer extends Renderer {
 
     try {
       const page = await this.browser.newPage()
-      const pageGotoParams = lodash.extend(
+      const pageGotoParams = extend(
         { timeout: 120000 },
         data.pageGotoParams || {}
       )
-      await page.goto(
-        `file://${_path}${lodash.trim(savePath, '.')}`,
-        pageGotoParams
-      )
+      await page.goto(`file://${_path}${trim(savePath, '.')}`, pageGotoParams)
       const body = (await page.$('#container')) || (await page.$('body'))
 
       // 计算页面高度

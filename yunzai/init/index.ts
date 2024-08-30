@@ -1,4 +1,3 @@
-import './env'
 import './config.js'
 import './run.js'
 import './logger.js'
