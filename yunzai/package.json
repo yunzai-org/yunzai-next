@@ -1,7 +1,7 @@
 {
   "name": "yunzai",
-  "version": "1.0.7",
-  "author": "Yoimiya-Kokomi, Le-niao, ningmengchongshui",
+  "version": "1.0.8",
+  "author": "Le-niao",
   "description": "QQ Group Bot",
   "main": "./index.js",
   "type": "module",
@@ -24,13 +24,13 @@
     "yaml": "^2.4.1"
   },
   "files": [
-    "index.js",
-    "types",
     "pm2",
+    "rollup/index.js",
+    "tsconfig/tsconfig.json",
+    "types",
     "yaml",
-    "rollup",
     "global.d.ts",
-    "tsconfig/tsconfig.json"
+    "index.js"
   ],
   "types": "types",
   "exports": {
