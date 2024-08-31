@@ -135,9 +135,9 @@ data/
 config/test/*
 !config/test/default.yaml
 logs/
-resources/
-renderers/
-plugins/
+/resources
+/renderers
+/plugins
 
 # Docker file
 redis

@@ -58,6 +58,8 @@ export class EventLogin extends EventListener {
     // 次数
     let time = 0
 
+    let timeout = null
+
     const start = async () => {
       // 积累次数
       time++
@@ -82,11 +84,11 @@ export class EventLogin extends EventListener {
         logger.error('等待扫码超时，已停止运行\n')
         process.exit()
       } else {
-        start()
+        timeout = setTimeout(start, 1000 * 3)
       }
     }
 
-    const timeout = setTimeout(start, 2000)
+    timeout = setTimeout(start, 2000)
 
     // 未完成
     if (!inSlider) {
