@@ -1,47 +1,57 @@
 {
-  "name": "yunzai-next",
-  "version": "4.1.37",
+  "name": "yunzai",
+  "version": "1.1.1",
   "author": "Le-niao",
-  "description": "QQ Group Bot",
-  "main": "./src/main.js",
-  "private": true,
+  "description": "Bot",
+  "main": "./lib/index.js",
   "type": "module",
   "scripts": {
-    "app": "node src/main.js",
-    "login": "node src/main.js --login",
-    "start": "pm2 startOrRestart pm2.config.cjs",
-    "stop": "pm2 stop pm2.config.cjs",
-    "delete": "pm2 delete pm2.config.cjs",
-    "kill": "pm2 kill",
-    "logs": "pm2 logs",
-    "monit": "pm2 monit",
-    "pm2": "pm2",
+    "app": "npx tsx src/main.ts",
+    "login": "npx tsx src/main.ts --login",
     "build": "rollup --config rollup.config.js",
-    "version-app": "npx tsx src/version.ts",
-    "ts-app": "npx tsx src/main.js",
-    "test-app": "npx tsx src/main.ts",
     "format": "prettier --write .",
     "check-format": "git diff --exit-code",
     "prepare": "husky"
   },
   "dependencies": {
-    "icqq": "^0.6.10",
-    "image-size": "^1.1.1",
-    "lodash": "^4.17.21",
-    "oicq": "^2.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-puppeteer": "^1.0.3",
-    "yunzai": "link:yunzai",
-    "yunzai-mys": "^1.0.5",
-    "yz-system": "^1.0.9"
+    "art-template": "^4.13.2",
+    "chalk": "^5.3.0",
+    "chokidar": "^3.6.0",
+    "https-proxy-agent": "7.0.4",
+    "inquirer": "^9.2.16",
+    "lodash-es": "^4.17.21",
+    "log4js": "^6.9.1",
+    "md5": "^2.3.0",
+    "moment": "^2.30.1",
+    "node-fetch": "^3.3.2",
+    "node-localstorage": "^3.0.5",
+    "node-schedule": "^2.1.1",
+    "pm2": "^5.3.1",
+    "puppeteer": "^23.2.1",
+    "redis": "^4.6.13",
+    "yaml": "^2.5.0"
+  },
+  "types": "types",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./tsconfig.json": {
+      "import": "./tsconfig.json",
+      "require": "./tsconfig.json"
+    },
+    "./pm2": {
+      "require": "./pm2/config.cjs",
+      "types": "./pm2/config.d.ts"
+    },
+    "./rollup": {
+      "import": "./lib/rollup.js",
+      "types": "./lib/rollup.d.ts"
+    }
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-typescript": "^11.1.3",
     "@types/inquirer": "^9.0.7",
     "@types/lodash": "^4.17.7",
@@ -51,17 +61,29 @@
     "@types/node-schedule": "^2.1.7",
     "@types/react": "^18.3.3",
     "@types/redis": "^4.0.11",
-    "babel-plugin-module-resolver": "^5.0.2",
     "husky": "^9.1.1",
+    "icqq": "^0.6.10",
+    "image-size": "^1.1.1",
+    "lodash": "^4.17.21",
+    "oicq": "^2.3.1",
     "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-puppeteer": "^1.0.3",
     "rollup": "^4.16.4",
-    "typescript": "^5.5.4"
+    "rollup-plugin-dts": "^6.1.1",
+    "typescript": "^5.5.4",
+    "yunzai": "link:.",
+    "yunzai-mys": "^1.0.5",
+    "yz-system": "^1.0.10"
   },
-  "workspaces": [
-    "plugins/**",
-    "renderers/**"
+  "keywords": [
+    "yunzai"
   ],
-  "imports": {
-    "#yunzai": "./lib/index.js"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=16.14.0"
   }
 }

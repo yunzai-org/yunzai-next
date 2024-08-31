@@ -1,6 +1,0 @@
-export { EventLogin } from '@/core/events/login'
-export { EventMessage } from '@/core/events/message'
-export { EventNotice } from '@/core/events/notice'
-export { EventOffline } from '@/core/events/offline'
-export { EventOnline } from '@/core/events/online'
-export { EventRequest } from '@/core/events/request'

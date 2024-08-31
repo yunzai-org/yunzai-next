@@ -1,90 +1,96 @@
-import typescript from '@rollup/plugin-typescript'
 import { defineConfig } from 'rollup'
-import babel from '@rollup/plugin-babel'
-
-const onwarn = (warning, warn) => {
-  // 忽略与无法解析the导入相关the警告信息
-  if (warning.code === 'UNRESOLVED_IMPORT') return
-  // 继续使用默认the警告处理
-  warn(warning)
-}
-
-const babelPlugin = babel({
-  babelHelpers: 'bundled',
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-react',
-    '@babel/preset-typescript'
-  ],
-  // 编译插件
-  plugins: [
-    [
-      'module-resolver',
-      {
-        // 根
-        root: ['./'],
-        // @ 别名 -> 当前目录
-        alias: {
-          '@': './yunzai'
-        }
-      }
-    ]
-  ]
-})
-
+import typescript from '@rollup/plugin-typescript'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
+import alias from '@rollup/plugin-alias'
+import dts from 'rollup-plugin-dts'
 export default defineConfig([
   {
-    input: 'yunzai/index.ts',
+    input: './src/index.ts',
     output: {
-      file: 'yunzai/index.js',
+      // lib 目录
+      dir: 'lib',
       format: 'es',
-      sourcemap: false
+      sourcemap: false,
+      preserveModules: true
     },
     plugins: [
-      babelPlugin,
+      // 处理ts文件
+      typescript({
+        compilerOptions: {
+          outDir: 'lib'
+        },
+        include: ['src/**/*']
+      })
+    ],
+    onwarn: (warning, warn) => {
+      // 忽略与无法解析the导入相关the警告信息
+      if (warning.code === 'UNRESOLVED_IMPORT') return
+      // 继续使用默认the警告处理
+      warn(warning)
+    }
+  },
+  {
+    input: './src/index.ts',
+    output: {
+      // lib 目录
+      dir: 'lib',
+      format: 'es',
+      sourcemap: false,
+      preserveModules: true
+    },
+    plugins: [
+      // 处理别名
+      alias({
+        entries: [
+          {
+            find: '@',
+            replacement: resolve(dirname(fileURLToPath(import.meta.url)), 'src')
+          }
+        ]
+      }),
+      // 处理ts文件
+      typescript({
+        compilerOptions: {
+          outDir: 'lib'
+        },
+        include: ['src/**/*']
+      }),
+      // 所有的dts文件输出
+      dts()
+    ],
+    onwarn: (warning, warn) => {
+      // 忽略与无法解析the导入相关the警告信息
+      if (warning.code === 'UNRESOLVED_IMPORT') return
+      // 继续使用默认the警告处理
+      warn(warning)
+    }
+  },
+  {
+    input: './src/rollup.ts',
+    output: {
+      // lib 目录
+      dir: 'lib',
+      format: 'es',
+      sourcemap: false,
+      preserveModules: true
+    },
+    plugins: [
+      // 处理ts文件
       typescript({
         compilerOptions: {
           declaration: true,
-          declarationDir: 'yunzai/types',
-          outDir: 'yunzai/types'
+          declarationDir: 'lib',
+          outDir: 'lib'
         },
-        include: ['yunzai/**/*']
+        include: ['src/rollup.ts']
       })
     ],
-    onwarn: onwarn
-  },
-  {
-    input: 'yunzai/rollup/index.ts',
-    output: {
-      file: 'yunzai/rollup/index.js',
-      format: 'es',
-      sourcemap: false
-    },
-    plugins: [
-      typescript({
-        compilerOptions: {
-          declaration: false
-        },
-        include: ['yunzai/rollup/index.ts']
-      })
-    ],
-    onwarn: onwarn
-  },
-  {
-    input: 'src/main.ts',
-    output: {
-      file: 'src/main.js',
-      format: 'es',
-      sourcemap: false
-    },
-    plugins: [
-      typescript({
-        compilerOptions: {
-          declaration: false
-        },
-        include: ['src/main.ts']
-      })
-    ],
-    onwarn: onwarn
+    onwarn: (warning, warn) => {
+      // 忽略与无法解析the导入相关the警告信息
+      if (warning.code === 'UNRESOLVED_IMPORT') return
+      // 继续使用默认the警告处理
+      warn(warning)
+    }
   }
 ])

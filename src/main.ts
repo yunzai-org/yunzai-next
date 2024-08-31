@@ -1,4 +1,4 @@
-import { Client, Loader, createLogin, Processor } from 'yunzai'
+import { Client, Loader, createLogin, Processor } from './index.js'
 
 // *********************
 const initialize = () => {

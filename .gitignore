@@ -136,6 +136,8 @@ config/test/*
 !config/test/default.yaml
 logs/
 resources/
+renderers/
+plugins/
 
 # Docker file
 redis
@@ -146,36 +148,14 @@ redis
 /entrypoint.sh
 
 # mkdir
-dist/
-docs/
-public/
-/html/
-/.html/
+ 
+/config
+/src/**/*.js
+/lib
+
+
 
 yarn.lock
 
-/yunzai/**/*.js
-/yunzai/types
-/yunzai-mys/**/*.js
-/yunzai-mys/types
-
-/middleware/**/*.js
-
-types
-
-/src/**/*.js
-
-/.cache/
-
-
-
-log.md
-
-/config
-
-test.ts
-
-
 # mac
-
 .DS_Store
