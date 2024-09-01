@@ -212,7 +212,7 @@ export class ProcessConfig {
    */
   get pm2() {
     const dir = join(process.cwd(), 'pm2.config.cjs')
-    return existsSync(dir) ? require(dir) : require('../../pm2.config.cjs')
+    return existsSync(dir) ? require(dir) : require('../../pm2/config.cjs')
   }
 
 
