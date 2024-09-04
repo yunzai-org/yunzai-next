@@ -76,7 +76,7 @@ export default class Puppeteer extends Renderer {
     try {
       // 获取Mac地址
       if (!mac) {
-        mac = await this.getMac()
+        mac = this.getMac()
         this.browserMacKey = `${BOT_CHROMIUM_KEY}browserWSEndpoint:${mac}`
       }
       // 是否有browser实例
@@ -250,9 +250,7 @@ export default class Puppeteer extends Renderer {
 
       if (!data.multiPage) {
         buff = await body.screenshot(randData)
-
-        buff = buff instanceof Uint8Array ? Buffer.from(buff) : buff
-
+        if (buff instanceof Uint8Array) buff = Buffer.from(buff)
         this.renderNum++
         /** 计算图片大小 */
         const kb = (buff.length / 1024).toFixed(2) + 'KB'
@@ -287,7 +285,7 @@ export default class Puppeteer extends Renderer {
             buff = await page.screenshot(randData)
           }
 
-          buff = buff instanceof Uint8Array ? Buffer.from(buff) : buff
+          if (buff instanceof Uint8Array) buff = Buffer.from(buff)
 
           if (num > 2) {
             await new Promise(resolve => setTimeout(resolve, 200))
