@@ -1,16 +1,18 @@
-import Renderer from '@/utils/renderer/loader.js'
+import Renderer from '@/image/renderer/loader.js'
 /**
- * 这是被废弃的截图工具
- * ********
- * 请阅读puppeteer了解制作截图工具
- * *******
  * @deprecated 已废弃
  */
 const renderer = Renderer.getRenderer()
+/**
+ * @deprecated 已废弃
+ */
 renderer.screenshot = async (name, data) => {
   const img = await renderer.render(name, data)
   return img ? global.segment.image(img) : img
 }
+/**
+ * @deprecated 已废弃
+ */
 renderer.screenshots = async (name, data) => {
   data.multiPage = true
   const imgs = (await renderer.render(name, data)) || []

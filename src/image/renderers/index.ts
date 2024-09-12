@@ -1,5 +1,5 @@
 import { PuppeteerLaunchOptions } from 'puppeteer'
-import Puppeteer from '@/utils/renderers/puppeteer.js'
+import Puppeteer from '@/image/renderers/puppeteer.js'
 /**
  *
  * 这是被废弃的截图工具

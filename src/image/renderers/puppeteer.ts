@@ -4,13 +4,12 @@ import puppeteer, { Browser, PuppeteerLaunchOptions } from 'puppeteer'
 import cfg from '@/config/config.js'
 import { Redis } from '@/init/redis.js'
 import { BOT_CHROMIUM_KEY } from '@/config/system.js'
-import Renderer from '@/utils/renderer/Renderer.js'
+import Renderer from '@/image/renderer/Renderer.js'
 const _path = process.cwd()
 /**
  * mac地址
  */
 let mac = ''
-
 /**
  * 这是被废弃的截图工具
  * ***********
@@ -45,6 +44,7 @@ export default class Puppeteer extends Renderer {
       type: 'image',
       render: 'screenshot'
     })
+    // 配置
     this.config = {
       headless: config.headless || 'new',
       args: config.args || [
@@ -52,13 +52,16 @@ export default class Puppeteer extends Renderer {
         '--disable-setuid-sandbox',
         '--no-sandbox',
         '--no-zygote'
-      ]
+      ],
+      executablePath:
+        config?.chromiumPath ??
+        config?.executablePath ??
+        cfg?.bot?.chromium_path ??
+        null,
+      wsEndpoint: config?.puppeteerWS ?? cfg?.bot?.puppeteer_ws ?? 0,
+      puppeteerTimeout:
+        config?.puppeteerTimeout ?? cfg?.bot?.puppeteer_timeout ?? 0
     }
-    this.config.executablePath =
-      config?.chromiumPath ?? config.executablePath ?? cfg?.bot?.chromium_path
-    this.config.wsEndpoint = config?.puppeteerWS ?? cfg?.bot?.puppeteer_ws ?? 0
-    this.puppeteerTimeout =
-      config?.puppeteerTimeout ?? cfg?.bot?.puppeteer_timeout ?? 0
   }
 
   /**
@@ -107,9 +110,7 @@ export default class Puppeteer extends Renderer {
         } else {
           logger.error(err.toString())
           if (errMsg.includes('Could not find Chromium')) {
-            logger.error(
-              '没有正确安装 Chromium，可以尝试执行安装命令：node node_modules/puppeteer/install.js'
-            )
+            logger.error('没有正确安装 Chromium..')
           } else if (errMsg.includes('cannot open shared object file')) {
             logger.error('没有正确安装 Chromium 运行库')
           }

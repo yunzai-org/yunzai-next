@@ -1,6 +1,6 @@
 {
   "name": "yunzai",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "author": "Le-niao",
   "description": "Bot",
   "main": "./lib/index.js",
@@ -67,13 +67,13 @@
     "lodash": "^4.17.21",
     "oicq": "^2.3.1",
     "prettier": "^3.3.3",
-    "react-puppeteer": "^1.0.4",
+    "react-puppeteer": "^1.0.7",
     "rollup": "^4.16.4",
     "rollup-plugin-dts": "^6.1.1",
     "typescript": "^5.5.4",
     "yunzai": "link:.",
     "yunzai-mys": "^1.0.6",
-    "yz-system": "^1.0.11"
+    "yz-system": "^1.0.13"
   },
   "keywords": [
     "yunzai"

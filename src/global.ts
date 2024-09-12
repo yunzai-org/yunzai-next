@@ -2,7 +2,7 @@ import { segment as se, Client } from 'icqq'
 import { RedisClientType } from 'redis'
 import { type ChalkInstance } from 'chalk'
 import { plugin as p } from './core/index.js'
-import { Renderer as Ren } from './utils/index.js'
+import { Renderer as Ren } from './image/index.js'
 type LogType = string | Error | unknown
 type LoggerType = {
   /**

@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { isFunction } from 'lodash-es'
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import { ConfigController as cfg, CONFIG_INIT_PATH } from '@/config/index.js'
-import rendererFn from '@/utils/renderers/index.js'
+import rendererFn from '@/image/renderers/index.js'
 
 /**
  * 加载渲染器
@@ -14,17 +14,11 @@ import rendererFn from '@/utils/renderers/index.js'
  * @deprecated 已废弃
  */
 class RendererLoader {
-  /**
-   *
-   */
+  //
   renderers = new Map()
-  /**
-   *
-   */
+  //
   dir = join(process.cwd(), 'renderers')
-  /**
-   *
-   */
+  //
   watcher = {}
   /**
    *
@@ -36,7 +30,7 @@ class RendererLoader {
     return render
   }
   /**
-   *
+   * 加载 puppeteer.yaml 配置
    */
   async load() {
     mkdirSync(this.dir, { recursive: true })

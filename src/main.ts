@@ -3,7 +3,7 @@ import { Client, Loader, createLogin, Processor } from './index.js'
 // *********************
 const initialize = () => {
   // 读取 yunzai.config.js
-  Processor.install()
+  Processor.install(['yunzai.config.ts'])
   // 加载插件
   Loader.load()
 }

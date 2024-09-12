@@ -1,7 +1,6 @@
 import chokidar from 'chokidar'
 import template from 'art-template'
-import { dirname } from 'node:path'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
 /**
  *
@@ -29,22 +28,8 @@ export default class Renderer {
     this.type = data.type || 'image'
     /** 渲染器入口 */
     this.render = this[data.render || 'render']
-    this.createDir(this.dir)
-  }
-  /**
-   * 创建文件夹
-   * @param dirname
-   * @returns
-   */
-  createDir(name: string) {
-    if (existsSync(name)) {
-      return true
-    } else {
-      if (this.createDir(dirname(name))) {
-        mkdirSync(name)
-        return true
-      }
-    }
+    /** 确保目录存在 */
+    mkdirSync(this.dir, { recursive: true })
   }
   /**
    * 模板
@@ -52,12 +37,13 @@ export default class Renderer {
    * @param data
    * @returns
    */
-  dealTpl(name, data) {
+  dealTpl(name: string, data: any) {
     const { tplFile, saveId = name } = data
     const savePath = `./temp/html/${name}/${saveId}.html`
     /** 读取html模板 */
     if (!this.html[tplFile]) {
-      this.createDir(`./temp/html/${name}`)
+      /** 确保目录存在 */
+      mkdirSync(`./temp/html/${name}`, { recursive: true })
       try {
         this.html[tplFile] = readFileSync(tplFile, 'utf8')
       } catch (error) {
@@ -79,7 +65,7 @@ export default class Renderer {
    * @param tplFile
    * @returns
    */
-  watch(tplFile) {
+  watch(tplFile: string) {
     if (this.watcher[tplFile]) return
     const watcher = chokidar.watch(tplFile)
     watcher.on('change', () => {
